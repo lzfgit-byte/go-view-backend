@@ -1,12 +1,12 @@
 #dev环境  mysql7.0
 spring:
   datasource:
-    driver-class-name: org.sqlite.JDBC
-    url: jdbc:sqlite:D:\\eclipse-workspace\v2-goview-bate\sqllite\goview.db
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/goview?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
     #linux服务器
     #url: jdbc:sqlite://home/cqfy/project/OSSDATABASE/oss.db
-    username: 
-    password: 
+    username: lzf
+    password: root
     ### 连接池配置
     druid:
       initial-size: 10
