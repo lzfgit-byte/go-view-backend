@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -21,6 +23,7 @@ public class CollectController {
     public AjaxResult addCollect(@RequestBody Collect collect){
         collect.setId(IdWorker.getIdStr());
         collect.setUserId("1");
+        collect.setCreateDate(new SimpleDateFormat("HH:mm:ss").format(new Date()));
         iCollectService.save(collect);
         return AjaxResult.success();
     }
