@@ -1,12 +1,8 @@
 package cn.com.collect.controller;
 
-import cn.com.collect.mapper.CollectMapper;
 import cn.com.collect.model.Collect;
 import cn.com.collect.service.ICollectService;
-import cn.com.collect.service.impl.ICollectServiceImpl;
 import cn.com.v2.common.domain.AjaxResult;
-import cn.com.v2.util.SaTokenUtil;
-import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
