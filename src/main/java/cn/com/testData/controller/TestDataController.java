@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 @RequestMapping("/api/goview/testData")
 public class TestDataController extends BaseController {
 
-
+    private int count  = 0;
     @GetMapping("/get")
     public AjaxResult getTestData(@RequestParam String projectId,HttpServletResponse response){
         Random random = new Random(System.currentTimeMillis());
@@ -37,10 +37,13 @@ public class TestDataController extends BaseController {
     @GetMapping("/get2")
     public AjaxResult getTestData2(@RequestParam String projectId,HttpServletResponse response){
         //{ xAxis: ['12:16:04', 5], series: [143, 9.6] }
+        if(this.count >= 100){
+            this.count = 0;
+        }
         Random random = new Random(System.currentTimeMillis());
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         Map<String,List<Object>> res = new HashMap<>();
-        res.put("xAxis",Arrays.asList(sdf.format(new Date()),new Date().getTime()));
+        res.put("xAxis",Arrays.asList(sdf.format(new Date()),this.count++));
         res.put("series",Arrays.asList(random.nextInt(1200),random.nextInt(30)));
         return AjaxResult.successData(200,res);
     }
