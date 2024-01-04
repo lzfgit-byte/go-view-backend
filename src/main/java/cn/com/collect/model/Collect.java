@@ -1,6 +1,7 @@
 package cn.com.collect.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -13,9 +14,9 @@ public class Collect implements Serializable {
 
     @TableId(value = "id")
     private String id;
-    @TableId(value = "value")
+    @TableField(value = "value")
     private String value;
-    @TableId(value = "userId")
+    @TableField(value = "userId")
     private String userId;
 
 }
