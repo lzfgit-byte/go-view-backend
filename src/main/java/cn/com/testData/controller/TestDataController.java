@@ -18,9 +18,10 @@ import java.util.stream.Stream;
 @RequestMapping("/api/goview/testData")
 public class TestDataController extends BaseController {
 
-    private int count  = 0;
+    private int count = 0;
+
     @GetMapping("/get")
-    public AjaxResult getTestData(@RequestParam String projectId,HttpServletResponse response){
+    public AjaxResult getTestData(@RequestParam String projectId, HttpServletResponse response) {
         Random random = new Random(System.currentTimeMillis());
         AtomicReference<Random> autoRandom = new AtomicReference<>();
         autoRandom.set(random);
@@ -32,19 +33,41 @@ public class TestDataController extends BaseController {
             return temp;
         }).collect(Collectors.toList());
         System.out.println(projectId);
-        return AjaxResult.successData(200,collect);
+        return AjaxResult.successData(200, collect);
     }
+
     @GetMapping("/get2")
-    public AjaxResult getTestData2(@RequestParam String projectId,HttpServletResponse response){
+    public AjaxResult getTestData2(@RequestParam String projectId, HttpServletResponse response) {
         //{ xAxis: ['12:16:04', 5], series: [143, 9.6] }
-        if(this.count >= 100){
+        if (this.count >= 100) {
             this.count = 0;
         }
         Random random = new Random(System.currentTimeMillis());
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        Map<String,List<Object>> res = new HashMap<>();
-        res.put("xAxis",Arrays.asList(sdf.format(new Date()),this.count++));
-        res.put("series",Arrays.asList(random.nextInt(1200),random.nextInt(30)));
-        return AjaxResult.successData(200,res);
+        Map<String, List<Object>> res = new HashMap<>();
+        res.put("xAxis", Arrays.asList(sdf.format(new Date()), this.count++));
+        res.put("series", Arrays.asList(random.nextInt(1200), random.nextInt(30)));
+        return AjaxResult.successData(200, res);
+    }
+
+    @GetMapping("/get3")
+    public AjaxResult getTestData3() {
+        //{ xAxis: ['12:16:04', 5], series: [143, 9.6] }
+        /**
+         * [{"value":1048,"name":"Search Engine"},
+         * {"value":735,"name":"Direct"},
+         * {"value":580,"name":"Email"},
+         * {"value":484,"name":"Union Ads"},
+         * {"value":300,"name":"Video Ads"}]
+         */
+        Random random = new Random(System.currentTimeMillis());
+
+        List<Map<String, Object>> collect = Stream.of("Search Engine", "Direct", "Email", "Union Ads", "Video Ads").map(item -> {
+            Map<String, Object> temp = new HashMap<>();
+            temp.put("name", item);
+            temp.put("value", random.nextInt(1000));
+            return temp;
+        }).collect(Collectors.toList());
+        return AjaxResult.successData(200, collect);
     }
 }
